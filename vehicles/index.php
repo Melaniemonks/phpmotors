@@ -10,6 +10,10 @@ require_once '../model/vehicles-model.php';
 // Functions
 require_once '../library/functions.php';
 
+
+// Create or access a Session
+session_start();
+
 $classifications = getClassifications();
 
 

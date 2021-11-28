@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: /phpmotors/');
+    exit;
+}
+
+
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -31,7 +38,22 @@
 
 
         <main>
-            <h1>Insert Content<h1>
+        <h1><?php echo $_SESSION['clientData']['clientFirstname'] .' '. $_SESSION['clientData']['clientLastname'] ?></h1>
+        <p> You are logged in!</p>
+
+        <ul>
+            <li>First name: <?php echo $_SESSION['clientData']['clientFirstname']?></li>
+            <li>Last name: <?php echo $_SESSION['clientData']['clientLastname']?></li>
+            <li>Email Address: <?php echo $_SESSION['clientData']['clientEmail']?></li>
+        </ul>
+
+        <?php
+            if ($_SESSION['clientData']['clientLevel'] > 1) {
+                echo '<h2>Inventory Management</h2>';
+                echo '<p>Use this link to manage the Inventory.</p>';
+                echo '<a href="/phpmotors/vehicles/">Vehicle Management</a>';
+            }
+        ?>
         </main>
         
         <footer>

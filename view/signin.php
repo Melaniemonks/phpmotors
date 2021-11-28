@@ -28,16 +28,23 @@
         <main>
 
             <h1>Sign In</h1>
-            <?php if (isset($message)) {echo $message;}?>
+            <?php 
+                if (isset($_SESSION['message'])) {
+                echo $_SESSION['message'];
+                }
+            ?>
+            <?php
+                if (isset($message)) {
+                echo $message;
+                }
+            ?>
             <form action='/phpmotors/accounts/index.php' class='login' method='post'>
                 <label for="clientEmail">Email:</label><br>
-                <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";}  ?> required><br>
+                <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required><br>
                 
                 <label for="clientPassword">Password:</label><br>
                 <input type="password" id="clientPassword" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required><br><br>
                 <button class="signin" type="submit">Sign In</button>
-
-                
                 <input type="hidden" name="action" value="Login">
               </form>
               <ul class="reroute"><li>Don't have an account?<a href='/phpmotors/accounts/index.php?action=Registration'> click here! </a></li></ul>

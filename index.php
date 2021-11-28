@@ -7,7 +7,8 @@ require_once 'model/main-model.php';
 // Get the functions library
 require_once 'library/functions.php';
 
-
+// Create or access a Session
+session_start();
 
 //This is the main controller
 $classifications = getClassifications();#the getClassification has the data gotten from the database 
@@ -28,6 +29,11 @@ $navList = navBar($classifications);
 #the function '.urlencode'was just added to take care of any spaces and characters in the process
 
 // $navList .= '</ul>';
+
+// Check if the firstname cookie exists, get its value
+if(isset($_COOKIE['firstname'])){
+  $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+ }
 
 $action = filter_input(INPUT_POST, 'action');
  if ($action == NULL){
