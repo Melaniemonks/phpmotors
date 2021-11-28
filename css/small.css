@@ -1,0 +1,240 @@
+body{
+    max-width:1000px;
+    background-image: url('../images/site/small_check.jpg');
+    margin: 0 auto;
+    font-family: 'Rationale', sans-serif;
+    
+}
+
+p{
+    font-family: 'Iceland', sans-serif;
+    margin: .1rem;
+}
+
+h1{
+    font-size:1.5rem;
+    margin: .2rem;
+}
+
+.account{
+    padding:1rem;
+    margin:.5rem;
+}
+
+.account li{
+    list-style-type: none;
+}
+
+.account a{
+    color:black;
+    text-decoration: none;
+
+}
+
+#inside{
+    background-color: white;
+    border: 5px solid #4c96d7; 
+    border-radius: 1rem;
+    max-width: 100%;
+}
+header{
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+
+.top{
+    display:flex;
+    justify-content: space-between;
+}
+
+
+
+nav{
+    max-width: 100%;
+    background-color: #3a3a3a;
+}
+
+.arrange ul{
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.top p{
+    margin-right:2rem;
+    padding: 1rem;
+   
+}
+.it{
+    display:flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    padding: .1rem;
+    margin-right: .1rem;
+    justify-content: start;
+    
+}
+
+.it li{
+    list-style-type: none;
+    margin: .3rem;
+}
+
+.it a{
+    color: white;
+    text-decoration: none;
+    
+}
+
+.it li a:hover{
+    background-color: #4c96d7;
+    padding: 1.1rem;
+}
+
+/*Main*/
+main{
+    padding: 1rem;
+   
+}
+
+
+
+
+.content{
+  width: 100%;
+  padding:.5rem ;
+  
+  
+}
+
+
+
+
+
+.words{
+    color:#4c96d7;
+    position: absolute;
+    padding: .1rem;
+    top:-30px;
+    font-size: .6rem;
+    width: 100%;
+   
+    
+    
+}
+
+.button{
+  text-align: center;
+  padding:.1rem;
+}
+
+.button img{
+    width:40%;
+}
+
+.car{
+    position: relative;
+    
+    
+   
+}
+
+.words img{
+    max-width: 70%;
+}
+
+
+
+
+.motto{
+    width: 100%;
+
+}
+
+/* bottom flex*/
+.bottom {
+    display:flex;
+    flex-direction: column;
+    padding: 1rem;
+    justify-content: space-evenly;
+    
+
+   
+}
+
+.one,.two {
+    max-width:100%;
+    padding:1rem;
+}
+
+.links{
+    width: 100%;
+    
+}
+
+.links li{
+    padding:.7rem;
+    font-size: 1rem;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    max-width: 100%;
+   
+    
+}
+.parts{
+    padding:1rem;
+    max-width: 100%;
+    padding: 0;
+    margin: .1rem;
+    justify-items: stretch;
+    
+  
+}
+
+.parts li{
+    list-style-type: none;
+    text-align: center;
+}
+
+.parts a{
+    color:black
+    
+}
+
+.blue{
+    background-color:#4c96d7 ;
+    text-align: center;
+    max-width: 100%;
+    padding: .1rem;
+    border:1px solid black;
+    
+    
+}
+
+.blue img{
+   max-width: 100%;
+   justify-content: center;
+   height: 50px;
+  
+}
+
+.two ul{
+    font-size: 1.5rem;
+}
+
+/*footer*/
+footer{
+    padding: 1rem;
+    border-top: 5px solid black;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}

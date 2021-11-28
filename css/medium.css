@@ -1,0 +1,22 @@
+@media only screen and (min-width: 32.5em) {
+    .button{
+        position: absolute;
+        top: 110px;
+        width:60%;
+        text-align: left;
+    }
+
+    .button img{
+        width:30%;
+    }
+
+    .words{
+        bottom:350px;
+        font-size: 1rem;
+        
+        
+    }
+    .one, .two{
+        width:100%
+    }
+}

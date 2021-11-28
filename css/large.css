@@ -1,0 +1,45 @@
+@media only screen and (min-width: 62.5em) {
+    .it li{
+        list-style-type: none;
+        max-width: 10%;
+        margin: .9rem;
+    }
+
+    h1{
+        font-size: 2rem;
+    }
+    /*main*/
+    
+
+    .car img{
+    width: 100%;
+    }
+
+    .button{
+        width:100%;
+        bottom: 305px;
+      
+    }
+
+    .button img{
+        width:20%;
+        margin: .1rem;
+    }
+
+    .words{
+        bottom:380px;
+        font-size: 1.1rem;
+        
+        
+    }
+
+    .bottom{
+        grid-gap: 10px;
+        flex-direction: row;
+    }
+    
+    .links li{
+        font-size: 1rem;
+    }
+}
+
