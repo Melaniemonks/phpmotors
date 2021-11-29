@@ -74,6 +74,105 @@ function insertVehicle($invMake, $invModel, $invDescription, $invImage, $invThum
    }
 
 
+   // Get vehicles by classificationId 
+   function getInventoryByClassification($classificationId){ 
+      $db = phpmotorsConnect(); 
+      $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId'; 
+      $stmt = $db->prepare($sql); 
+      $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT); 
+      $stmt->execute(); 
+      $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+      $stmt->closeCursor(); 
+      return $inventory; 
+   }
+
+//Selecting a single vehicle based on its ID
+// Get vehicle information by invId
+function getInvItemInfo($invId){
+   $db = phpmotorsConnect();
+   $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+   $stmt = $db->prepare($sql);
+   $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+   $stmt->execute();
+   $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+   $stmt->closeCursor();
+   return $invInfo;
+  }
+
+
+  // function will update vehicle
+  function updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId){
+   // Create a connection object from the phpmotors connection function
+   $db = phpmotorsConnect(); 
+   // The SQL statement to be used with the database 
+   $sql = 'UPDATE inventory SET invMake = :invMake, invModel = :invModel, 
+	invDescription = :invDescription, invImage = :invImage, 
+	invThumbnail = :invThumbnail, invPrice = :invPrice, 
+	invStock = :invStock, invColor = :invColor, 
+	classificationId = :classificationId WHERE invId = :invId';
+   // The next line creates the prepared statement using the phpmotors connection      
+   $stmt = $db->prepare($sql);#sends statement to server and checks for correctness
+
+// The next line replace the placeholders in the SQL
+   // statement with the actual values in the variables
+   // and tells the database the type of data it is
+   $stmt->bindValue(':invMake', $invMake, PDO::PARAM_STR); #replaces name parameter with values recieved from DB variable and tells database type of data
+   $stmt->bindValue(':invModel', $invModel, PDO::PARAM_STR);
+   $stmt->bindValue(':invDescription', $invDescription, PDO::PARAM_STR);
+   $stmt->bindValue(':invImage', $invImage, PDO::PARAM_STR);
+   $stmt->bindValue(':invThumbnail', $invThumbnail, PDO::PARAM_STR);
+   $stmt->bindValue(':invPrice', $invPrice, PDO::PARAM_STR);
+   $stmt->bindValue(':invStock', $invStock, PDO::PARAM_STR);
+   $stmt->bindValue(':invColor', $invColor, PDO::PARAM_STR);
+   $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_STR);
+   $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+   // The next line runs the prepared statement 
+
+   $stmt->execute(); #sends SQl complete statement to the server
+   // The next line gets the data from the database and 
+   // stores it as an array in the $classifications variable 
+
+   // Ask how many rows changed as a result of our insert
+   $rowsChanged = $stmt->rowCount();# shows the number of rows that were affected by inserted information
+   // Close the database interaction
+
+   $stmt->closeCursor(); #closes interaction between function and DB server
+   // Return the indication of success (rows changed)
+
+   return $rowsChanged;#sends changed row to the controller
+  }
+
+
+  // function will delete vehicle
+  function deleteVehicle($invId){
+   // Create a connection object from the phpmotors connection function
+   $db = phpmotorsConnect(); 
+   // The SQL statement to be used with the database 
+   $sql =  'DELETE FROM inventory WHERE invId = :invId';
+   // The next line creates the prepared statement using the phpmotors connection      
+   $stmt = $db->prepare($sql);#sends statement to server and checks for correctness
+
+// The next line replace the placeholders in the SQL
+   // statement with the actual values in the variables
+   // and tells the database the type of data it is
+   $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+   // The next line runs the prepared statement 
+
+   $stmt->execute(); #sends SQl complete statement to the server
+   // The next line gets the data from the database and 
+   // stores it as an array in the $classifications variable 
+
+   // Ask how many rows changed as a result of our insert
+   $rowsChanged = $stmt->rowCount();# shows the number of rows that were affected by inserted information
+   // Close the database interaction
+
+   $stmt->closeCursor(); #closes interaction between function and DB server
+   // Return the indication of success (rows changed)
+
+   return $rowsChanged;#sends changed row to the controller
+  }
+
+
    //NOTES
 
 //Lines 5 and 39 creates functions that have the stated parameters  

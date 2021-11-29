@@ -46,9 +46,95 @@ $action = filter_input(INPUT_POST, 'action');
       include '../view/register.php';
     break;
 
+    case 'updateAccount':
+      include '../view/client-update.php';
+    break;
+
+    case 'updatedAccount':
+      $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+      $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+      $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+      $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+
+      // Check clientEmail to determine if it "looks" like a valid email address
+      $clientEmail = checkEmail($clientEmail);
+
+      // Check if clientEmail exists in the database
+      $existingEmail = emailCheck($clientEmail);
+
+      // If email is in the database
+      if ($existingEmail) {
+          // Set condition to check that the new email typed is not the current email of user (Meaning it belongs to another account)
+          if ($clientEmail != $_SESSION['clientData']['clientEmail']) {
+              $message = '<p class="notice">That email address already exists. Please enter another email address.</p>';
+              include '../view/client-update.php';
+              exit;
+          }
+      }
+
+      // Check for missing data
+      if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
+          $messageEmpty = '<p class="errorFormMessage">Please provide information for all empty form fields.</p>';
+          include '../view/client-update.php';
+          exit; 
+      }
+
+      // Send the updated account data to the model
+      $updateResultA = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
+
+      // Store the updated array into the session
+      $_SESSION['clientData'] = getClientById($clientId);
+
+      // Check and report the result
+      if ($updateResultA) {
+          $message = "<p class='notice'>$clientFirstname, your information has been updated.</p>";
+          $_SESSION['message'] = $message;
+          header('Location: /phpmotors/accounts/?action=admin');
+          exit;
+      } else {
+          $messageEmpty = "<p class='notice'>Sorry $clientFirstname, update failed or no changes have been made. Please try again.</p>";
+          include '../view/client-update.php';
+          exit;
+      }
+  break;
+    case 'modifyPassword':
+      // Filter and store password
+      $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
+      $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));
+
+      // Check clientPassword if it matches the given pattern. checkPassword() returns either 1 or 0 which is true or false
+      $checkPassword  = checkPassword($clientPassword);
+
+      // Check for missing data
+      if (empty($checkPassword)) {
+          $messagePin = '<p class="errorFormMessage">Error! Please make sure your password matches the desired pattern.</p>';
+          include '../view/client-update.php';
+          exit; 
+      }
+
+      // Hash the checked password
+      $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+
+      // Send the updated password to the model
+      $updateResult = updatePassword($hashedPassword, $clientId);
+
+      // Check and report the result
+      if ($updateResult) {
+          $message = "<p class='addSuccess'>".$_SESSION['clientData']['clientFirstname'].", your password has been successfully updated.</p>";
+          $_SESSION['message'] = $message;
+          header('location: /phpmotors/accounts/');
+          exit;
+      } else {
+          $messagePin = "<p class='notice'>Sorry".$_SESSION['clientData']['clientFirstname']." We could not updated your password. Please try again.</p>";
+          include '../view/client-update.php';
+          exit;
+      }
+  
+      break;
+
 
     //Button to register user
-   case 'register':
+      case 'register':
 
       // Filter and store the data
       $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING));
