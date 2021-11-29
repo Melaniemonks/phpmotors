@@ -41,5 +41,39 @@
     .links li{
         font-size: 1rem;
     }
+
+
+    /* For vehicle display in classification view DO NOT TOUCH */
+	#inv-display {
+		flex-flow: row wrap;
+		justify-content: flex-start;
+	}
+
+	#inv-display h2{
+		font-size: 1rem;
+	}
+
+	#inv-display li {
+		max-width: 200px;
+		flex: 1 0 auto;
+		text-align: center;
+		height: 250px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+      
+	#inv-display div {
+		width: 100%;
+    
+    
+
+	}
+
+    #inv-details{
+        display:flex;
+    }
+    
+    
 }
 
