@@ -185,6 +185,18 @@ function getInvItemInfo($invId){
    return $vehicles;
 }
 
+//This function will add obtain the information about vehicle in the inventory
+// Get information for all vehicles
+   function getVehicles(){
+	$db = phpmotorsConnect();
+	$sql = 'SELECT invId, invMake, invModel FROM inventory';
+	$stmt = $db->prepare($sql);
+	$stmt->execute();
+	$invInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$stmt->closeCursor();
+	return $invInfo;
+}
+
 
    //NOTES
 

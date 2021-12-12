@@ -52,55 +52,69 @@ header{
 }
 
 
+/*Inside the header*/
+
 .top{
     display:flex;
     justify-content: space-between;
 }
 
+.top img{
+    max-width: 100px;
+}
 
+/*WELCOM MESSAGE*/
+#welcome, #logOut{
+    padding:.1rem;
+    margin: .5rem;
+    text-decoration: none;
+    font-size: .9rem;
+    }
 
 nav{
     max-width: 100%;
     background-color: #3a3a3a;
+    font-size:1.3rem;
+
 }
 
-.arrange ul{
-    padding: 0;
-    margin: 0;
+ul{
+    margin:0;
+  
 }
 
-
-
-.top p{
-    margin-right:2rem;
-    padding: 1rem;
-   
-}
 .it{
     display:flex;
     flex-direction: row;
     flex-flow: wrap;
-    padding: .1rem;
-    margin-right: .1rem;
-    justify-content: start;
+    justify-content:flex-start;
+    margin: 0;
     
 }
 
 .it li{
     list-style-type: none;
-    margin: .3rem;
+    padding: .3rem;
+    border:5px solid white;
+ 
 }
 
 .it a{
     color: white;
     text-decoration: none;
+    margin:.5rem;
     
 }
 
 .it li a:hover{
     background-color: #4c96d7;
-    padding: 1.1rem;
+    padding: .5rem;
+    margin: 0px;
 }
+
+
+
+
 
 /*Main*/
 main{
