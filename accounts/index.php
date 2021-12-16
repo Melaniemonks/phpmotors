@@ -11,6 +11,9 @@ require_once '../model/accounts-model.php';
 // Get the functions library
 require_once '../library/functions.php';
 
+// Get the reviews model
+require_once '../model/reviews-model.php';
+
 
 // Create or access a Session
 session_start();
@@ -246,6 +249,13 @@ $action = filter_input(INPUT_POST, 'action');
       header('Location: /phpmotors/');
     break;
     default:
+    if (isset($_SESSION['clientData'])) {
+      $clientId = $_SESSION['clientData']['clientId'];
+      $reviewsInfo = getClientReviews($clientId);
+      if (count($reviewsInfo)) {
+          $clientReviews = buildClientReview($reviewsInfo);
+      }
+  }
       include '../view/admin.php';
  }
 

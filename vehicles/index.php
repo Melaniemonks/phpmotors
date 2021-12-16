@@ -10,6 +10,7 @@ require_once '../model/vehicles-model.php';
 // Functions
 require_once '../library/functions.php';
 require_once '../model/uploads-model.php';
+require_once '../model/reviews-model.php';
 
 
 // Create or access a Session
@@ -226,7 +227,7 @@ switch ($action){
 
       case 'vehicleDetails':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_NUMBER_INT);
-        $invName = $invId;
+        //$invName = $invId;
         $vehicle = getVehicleDetailsById($invId);
         $vehicleThumbs = getThumbnailsById($invId);
         if(!count($vehicle)){
@@ -235,6 +236,24 @@ switch ($action){
             $showThumbs = showThumbnails($vehicleThumbs);
             $vehicleInfo = buildVehicleInfo($vehicle);
         }
+
+        if (isset($_SESSION['loggedin'])) {
+          if ($_SESSION['loggedin']) {
+            $screenName = getScreenName($_SESSION['clientData']['clientFirstname'], $_SESSION['clientData']['clientLastname']);
+          }
+      }
+
+      $reviewsInfo = getReviewsByInv($invId);
+      if (count($reviewsInfo)) {
+          $reviewsDisplay = buildReviewsDisplay($reviewsInfo);
+      } else {
+          if (isset($_SESSION['loggedin'])) {
+              $reviewMessage = "Be the first to write a review.";
+          } else {
+              $reviewMessage = "No review has been made to this vehicle. Log in and be the first.";
+          }
+      }
+
         include '../view/vehicle-detail.php';
     break;
 

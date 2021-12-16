@@ -64,6 +64,11 @@ if (isset($_SESSION['message'])) {
                 echo '<p>Use this link to manage the Inventory.</p>';
                 echo '<a href="/phpmotors/vehicles/">Vehicle Management</a>';
             }
+
+            if (isset($clientReviews)) {
+                echo '<h2>Manage Your Product Reviews</h2>';
+                echo $clientReviews;
+            }
         ?>
         </main>
         

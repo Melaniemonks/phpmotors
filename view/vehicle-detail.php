@@ -43,6 +43,42 @@
                 echo $showThumbs;
             } ?>  
         </div>
+
+
+        <hr>
+        <h2>Customer Reviews</h2>
+        <?php
+            if (isset($_SESSION['loggedin'])) {
+                echo'<h3>Review the ' . $vehicle['invMake'] . ' ' . $vehicle['invModel'] . '</h3>';
+
+                echo "<form method='post' action='/phpmotors/reviews/'>";
+                    echo '<label for="screenName">Screen Name:</label><br>';
+                    echo '<input class="form" type="text" id="screenName" name="screenName" value ="' . $screenName. '" readonly ?><br>';
+                    echo '<label for="reviewText">Review:</label><br>';
+                    echo '<textarea class="form" id="reviewText" name="reviewText" placeholder="Write your review..." required></textarea><br>';
+                    echo '<div class="submit">';
+                        echo '<input class="submitAccount" type="submit" value="SUBMIT REVIEW">';
+                        echo '<!-- Add the action name - value pair -->';
+                        echo '<input type="hidden" name="action" value="addReview">';
+                        echo '<input type="hidden" name="invId" value="' . $vehicle['invId'] . '">';
+                        echo '<input type="hidden" name="clientId" value="' . $_SESSION['clientData']['clientId'] . '">';
+                        // echo '<input type="hidden" name="invMake" value="' . $vehicle['invMake'] . '">';
+                        // echo '<input type="hidden" name="invModel" value="' . $vehicle['invModel'] . '">';
+                    echo '</div>';
+                echo '</form>';
+            }
+            else {
+                echo '<p>You must <a href="/phpmotors/accounts/index.php?action=login">login</a> to write a review.</p>';
+            }
+            if (isset($_SESSION['messageReview'])) {
+                echo $_SESSION['messageReview'];
+            }
+            if (isset($reviewsDisplay)){
+                echo $reviewsDisplay;
+            } else {
+                echo $reviewMessage;
+            }
+        ?>
         </main>
         
         <footer>

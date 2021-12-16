@@ -258,3 +258,45 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height) 
     // Free any memory associated with the old image
     imagedestroy($old_image);
 }   // ends resizeImage function
+
+
+
+
+
+
+/* * ********************************
+*  Functions for working with reviews
+* ********************************* */
+
+// Create screen name in the format: First name initial + last name
+function getScreenName($firstName, $lastName) {
+    $screenName = strtoupper(substr($firstName,0,1)).strtoupper(substr($lastName,0,1)).strtolower(substr($lastName,1));
+    return $screenName;
+}
+
+function buildReviewsDisplay($reviewsInfo)
+{
+    $dv = "<div class='reviewWrap'>";
+    foreach ($reviewsInfo as $review) {
+        $dv .= "<div>";
+        $date = date_create("$review[reviewDate]");
+        $dv .= "<p class='reviewInfo'>" . strtoupper(substr($review['clientFirstname'], 0, 1)) . strtoupper(substr($review['clientLastname'], 0, 1)) . strtolower(substr($review['clientLastname'], 1)) . " wrote on " . date_format($date, 'd F, Y') . ": </p>";
+        $dv .= "<p class='reviewText'>" . $review['reviewText'] . "</p>";
+        $dv .= '</div>';
+    }
+    $dv .= '</div>';
+    return $dv;
+}
+function buildClientReview($reviewsInfo)
+{
+    $dv = '<ul>';
+    foreach ($reviewsInfo as $review) {
+        $dv .= '<li>';
+        $date = date_create("$review[reviewDate]");
+        $dv .= "$review[invMake] $review[invModel] (Reviewed on " . date_format($date, 'd F, Y') . "): ";
+        $dv .= "<a href='/phpmotors/reviews/?action=updateReviewView&reviewId=$review[reviewId]'>Edit</a> | <a href='/phpmotors/reviews/?action=deleteReviewView&reviewId=$review[reviewId]'>Delete</a>";
+        $dv .= '</li>';
+    }
+    $dv .= '</ul>';
+    return $dv;
+}
