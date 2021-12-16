@@ -35,6 +35,7 @@
                 ?>
 
             <form action='/phpmotors/accounts/index.php' class = registration method="post">
+                <div class="myForm">
                 <label for="clientFirstname">First name:</label><br>
                 <input name="clientFirstname" id="clientFirstname" type="text" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";}  ?> required><br>
                 <label for="clientLastname">Last name:</label><br>
@@ -45,10 +46,14 @@
                 <label for="clientPassword">Password:</label><br>
                 <span>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</span><br> 
                 <input type="password" id="clientPassword" name="clientPassword" required pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"><br><br>
+
+                <div class="centerButton">
                 <button class="register" type="submit">Register</button>
+            </div>
 
 
                 <input type="hidden" name="action" value="register">
+            </div>
               </form>
         </main>
         <footer>

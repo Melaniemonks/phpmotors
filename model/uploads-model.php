@@ -1,5 +1,7 @@
 <?php
-// Add image information to the database table
+// PHP Motors Uploads Model
+
+// Function to add image information to the database table
 function storeImages($imgPath, $invId, $imgName, $imgPrimary) {
     $db = phpmotorsConnect();
     $sql = 'INSERT INTO images (invId, imgPath, imgName, imgPrimary) VALUES (:invId, :imgPath, :imgName, :imgPrimary)';
@@ -10,7 +12,7 @@ function storeImages($imgPath, $invId, $imgName, $imgPrimary) {
     $stmt->bindValue(':imgName', $imgName, PDO::PARAM_STR);
     $stmt->bindValue(':imgPrimary', $imgPrimary, PDO::PARAM_INT);
     $stmt->execute();
-        
+
     // Make and store the thumbnail image information
     // Change name in path
     $imgPath = makeThumbnailName($imgPath);
@@ -21,13 +23,13 @@ function storeImages($imgPath, $invId, $imgName, $imgPrimary) {
     $stmt->bindValue(':imgName', $imgName, PDO::PARAM_STR);
     $stmt->bindValue(':imgPrimary', $imgPrimary, PDO::PARAM_INT);
     $stmt->execute();
-    
+
     $rowsChanged = $stmt->rowCount();
     $stmt->closeCursor();
     return $rowsChanged;
-   }
+}
 
-   // Get Image Information from images table
+// Get Image Information from images table
 function getImages() {
     $db = phpmotorsConnect();
     $sql = 'SELECT imgId, imgPath, imgName, imgDate, inventory.invId, invMake, invModel FROM images JOIN inventory ON images.invId = inventory.invId';
@@ -36,7 +38,7 @@ function getImages() {
     $imageArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $imageArray;
-   }
+}
 
 // Delete image information from the images table
 function deleteImage($imgId) {
@@ -48,8 +50,7 @@ function deleteImage($imgId) {
     $result = $stmt->rowCount();
     $stmt->closeCursor();
     return $result;
-   }
-
+}
 
 // Check for an existing image
 function checkExistingImage($imgName){
@@ -61,5 +62,26 @@ function checkExistingImage($imgName){
     $imageMatch = $stmt->fetch();
     $stmt->closeCursor();
     return $imageMatch;
-   }
-   
+}
+
+
+// Get thumbnail images from Database through Image Id
+function getThumbnailsById($invId)
+{
+  $db = phpmotorsConnect();
+
+  $sql = 'SELECT i.imgId, i.imgPath, i.imgName, i.imgDate, im.invId, im.invMake, im.invModel 
+        FROM images i 
+        JOIN inventory im 
+        ON i.invId = im.invId
+        WHERE i.imgPath LIKE "%-tn%"
+        AND im.invId = :invId';
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue('invId', $invId, PDO::PARAM_INT);
+  $stmt->execute();
+
+  $imageArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $stmt->closeCursor();
+
+  return $imageArray;
+}

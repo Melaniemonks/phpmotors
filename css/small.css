@@ -14,6 +14,10 @@ body{
     
 }
 
+a{
+    text-decoration: none;
+}
+
 p{
     font-family: 'Iceland', sans-serif;
     margin: .1rem;
@@ -63,24 +67,38 @@ header{
     max-width: 100px;
 }
 
+.top a {
+    padding: 1rem;
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+    box-shadow: 1px 2px 3px black;
+    margin: .5rem;
+
+}
+
 /*WELCOM MESSAGE*/
 #welcome, #logOut{
-    padding:.1rem;
+    padding:.5rem;
     margin: .5rem;
     text-decoration: none;
-    font-size: .9rem;
+    font-size: 1.2rem;
+    box-shadow: none;
     }
 
 nav{
     max-width: 100%;
     background-color: #3a3a3a;
-    font-size:1.3rem;
+    
 
 }
 
 ul{
     margin:0;
   
+}
+ul.it{
+    padding: 0;
 }
 
 .it{
@@ -94,8 +112,7 @@ ul{
 
 .it li{
     list-style-type: none;
-    padding: .3rem;
-    border:5px solid white;
+    padding: .1rem;
  
 }
 
@@ -250,6 +267,60 @@ main{
     font-size: 1.5rem;
 }
 
+/*forms*/
+form{
+    width: 50%;
+    padding: 1rem;
+    background-color: #4c96d7;
+    border-left: 5px solid #3a3a3a;
+    box-shadow: 2px 4px 5px #3a3a3a;
+}
+
+input{
+    padding:.5rem;
+    font-family: 'Rationale', sans-serif;
+    font-size: 1.1rem;
+    border: none;
+    
+    
+    
+}
+
+
+
+#management fieldset{
+    margin: 0;
+}
+
+.centerButton{
+    text-align: center;
+}
+
+
+
+
+
+button{
+    padding: .6rem;
+    background-color:rgb(232, 240, 254);
+    color: #000000;
+    font-family:'Rationale', sans-serif; 
+    font-size: 1.1rem;
+  
+}
+
+.reroute{
+    padding: 1rem;
+    list-style-type: none;
+    
+}
+
+.reroute a{
+    text-decoration: none;
+    color:#4c96d7;
+}
+
+
 /*footer*/
 footer{
     padding: 1rem;
@@ -277,13 +348,19 @@ footer p {
     margin-bottom: .5em;
     border: 1px #ccc solid;
     list-style-type: none;
-    flex: 1 1 auto;
+    padding: .5rem;
     margin: 1rem;
    }
    
    #inv-display li img {
        max-width: 100%;
        
+   }
+
+   #inv-display li a{
+       padding: .5rem;
+       margin: .3rem;
+       color: black;
    }
 
    #inv-image{
@@ -310,3 +387,34 @@ footer p {
         background-color: rgb(201, 201, 201);
         padding:.5rem;
     }
+
+    /*selected Images*/
+    
+
+
+    div#thumbnails {
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+
+    li.list-thumbnails img:hover {
+        transform: scale(1.2);
+    }
+
+    li.list-thumbnails {
+        list-style: none;
+        text-align: center;
+    }
+   
+    li.list-thumbnails img, img#vehicles {
+        border-radius: 5px;
+    }
+
+    div#thumbnails {
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+
+#image-display li{
+    list-style-type: none;
+}

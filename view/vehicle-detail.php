@@ -35,9 +35,14 @@
         <?php if(isset($message)){
             echo $message; }
         ?>
-        <?php if(isset($vehicleInfo)){
-            echo $vehicleInfo;
-        } ?>
+        <div class="container-veh">  
+            <?php if(isset($vehicleInfo)){
+                echo $vehicleInfo;
+            } ?>
+            <?php if(isset($showThumbs)){
+                echo $showThumbs;
+            } ?>  
+        </div>
         </main>
         
         <footer>

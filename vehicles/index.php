@@ -9,6 +9,7 @@ require_once '../model/main-model.php';
 require_once '../model/vehicles-model.php';
 // Functions
 require_once '../library/functions.php';
+require_once '../model/uploads-model.php';
 
 
 // Create or access a Session
@@ -208,7 +209,7 @@ switch ($action){
 
       case 'classificationNew':
         $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING);
-        $vehicles = getVehiclesByClassification($classificationName);
+        $vehicles = getVehiclesByClassification($classificationName, 1);
 
         if(!count($vehicles)){
           $message = "<p class='notice'>Sorry, no $classificationName vehicles could be found.</p>";
@@ -226,10 +227,12 @@ switch ($action){
       case 'vehicleDetails':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_NUMBER_INT);
         $invName = $invId;
-        $vehicle = getInvItemInfo($invId);
+        $vehicle = getVehicleDetailsById($invId);
+        $vehicleThumbs = getThumbnailsById($invId);
         if(!count($vehicle)){
             $message = "<p class='notice'>Sorry, no $classificationName could be found.</p>";
         } else {
+            $showThumbs = showThumbnails($vehicleThumbs);
             $vehicleInfo = buildVehicleInfo($vehicle);
         }
         include '../view/vehicle-detail.php';

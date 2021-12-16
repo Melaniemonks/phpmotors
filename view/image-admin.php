@@ -44,7 +44,7 @@
                 echo $message;
                 } ?>
 
-                <form action="/phpmotors/uploads/" method="post" enctype="multipart/form-data">
+                <form id="management" action="/phpmotors/uploads/" method="post" enctype="multipart/form-data">
                 <label for="invItem">Vehicle</label>
                     <?php echo $prodSelect; ?>
                     <fieldset>

@@ -1,4 +1,8 @@
 @media only screen and (min-width: 32.5em) {
+    nav{
+        font-size: 1.3rem;
+    }
+
     .button{
         position: absolute;
         top: 110px;
@@ -18,5 +22,15 @@
     }
     .one, .two{
         width:100%
+    }
+
+    div.container-veh {
+        display: grid;
+        grid-template-columns: 18% 1fr;
+        grid-column-gap: 5px;
+    }
+
+    li.list-thumbnails img{
+        width: 100%;
     }
 }

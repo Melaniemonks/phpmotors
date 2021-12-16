@@ -37,7 +37,7 @@
                 <section class="content">
 
                     <div class="car">
-                        <img class="motto" src="images/delorean.jpg" alt="delorean">
+                        <img class="motto" src="/phpmotors/images/vehicles/delorean.jpg" alt="delorean">
 
                         <div class="words">
                             <h2>DMC Delorean</h2>
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="button">
-                            <img src="images/site/own_today.png" alt="own today">
+                            <img src="/phpmotors/images/site/own_today.png" alt="own today">
                         </div>
 
                     </div>
